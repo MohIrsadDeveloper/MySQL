@@ -65,3 +65,111 @@ MySQL Commands =>
         9. DROP TABLE - deletes a table
         10. CREATE INDEX - creates an index (search key)
         11. DROP INDEX - deletes an index
+
+
+
+<!-- Using W3Cube -->
+         <!-- DATABASE -->
+1. Create Database => CREATE DATABASE <DATABASE_NAME>;
+2. Use Database => USE <DATABASE_NAME>;
+3. Drop Database => DROP DATABASE <DATABASE_NAME>;
+4. Show Current Database => <DATABASES>;
+
+        <!-- TABLES -->
+1. Create Table => CREATE TABLE <TABLE_NAME> (
+                        column1 datatype,
+                        column2 datatype,
+                        column3 datatype,
+                        ....
+                    );
+
+2. Show Tables => SHOW TABLES;
+3. 
+
+        <!-- INSERT DATA INTO TABLE -->
+<!-- INSERT SINGLE ROW -->
+1. INSERT INTO <TABLE_NAME> (column1, column2, column3, ...)
+    VALUES (value1, value2, value3, ...);
+2. Show All Data => SELECT * FROM <TABLE_NAME>;
+3. Show Particular Column => SELECT <COLUMN_NAME> FROM <TABLE_NAME>;
+<!-- INSERT MULTIPLE ROWS -->
+1. INSERT INTO <TABLE_NAME> (column1, column2, column3, ...)
+    VALUES (value1, value2, value3, ...),
+            (value1, value2, value3, ...),
+            (value1, value2, value3, ...);
+<!-- IF TABLE COLUMN AND DATA INSERT IS EQUAL -->
+1. INSERT INTO <TABLE_NAME> VALUES (value1, value2, value3, ...);
+    or
+    INSERT INTO <TABLE_NAME> VALUES
+    (value1, value2, value3, ...),
+    (value1, value2, value3, ...),
+    (value1, value2, value3, ...);
+
+<!-- SELECT Query with WHERE Cluase -->
+1. Select all Column => SELECT * FROM <TABLE_NAME>;
+2. Select Some Column => SELECT column1, column2, ... FROM <TABLE_NAME>;
+3. Select using Alias =>   SELECT name AS "Student Name", age AS "AGE" FROM <TABLE_NAME>;
+4. Where => The WHERE clause is used to filter records.
+            SELECT * FROM <TABLE_NAME> WHERE <CONDITIONS>;
+        <!-- CONDITIONS -->
+        1. = equals
+        2. != not equal
+        3. > greater than
+        4. < less than
+        5. >= greater than or equal
+        6. <= less than or equal
+    ex. => SELECT * FROM  <students> WHERE AGE >= 18;
+
+<!-- MySQL constraints -->
+1. NOT NULL
+2. UNIQUE
+3. DEFAULT
+4. CHECK
+5. FOREGIN KEY
+6. PRIMARY KEY
+
+EX. => CREATE TABLE students (
+    id INT NOT NULL UNIQUE,
+    name varchar(100) not null,
+    email varchar(150) not null unique,
+    age tinyint check (age >= 18),
+    stutus boolean default 1
+);
+    => INSERT INTO students (id, name, email, age)
+                    VALUES (1, "abdul", "abdul@gmail.com", 16); // give error as age not correct;
+
+<!-- AND, OR & NOT -->
+1. AND Operator : MySQL logical AND operator compares two expressions and returns true if both of the expressions are true.
+        Syntax :
+            SELECT * FROM <TABLE_NAME> WHERE <CONDITION1> AND <CONDITION2>;
+        Ex. =>
+            SELECT * FROM students WHERE age >= 18 AND age <= 25;
+
+2. OR Operator : MySQL OR operator compares two expressins and returns TRUE if either of the expressions is TRUE.
+        Syntax :
+            SELECT * FROM <TABLE_NAME> WHERE <CONDITION1> OR <CONDITION2>;
+        Ex. =>
+            SELECT * FROM students <TABLE_NAME> WHERE city = "Mumbai" OR city = "Pune";
+
+3. NOT Operator : MySQL NOT operator reverses or negates the Inputs.
+        Syntax :
+            SELECT * FROM <TABLE_NAME> WHERE NOT <CONDITION1> AND NOT <CONDITION2>;
+        EX. =>
+            SELECE * FROM students WHERE NOT city = "Mumbai";
+4. IN Operator => The IN operator allows you to specify multiple values in a WHERE clause.
+                  The IN operator is a shorthand for multiple OR conditions.
+        Syntax : 
+            SELECT * FROM <TABLE_NAME> WHERE <COLUMN_NAME> IN (VALUE1, VALUE2, ...);
+        EX. =>
+            SELECT * FROM students WHERE age IN (19, 20, 21, 23);
+5. LIKE Operators =>  The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+        1. The percent sign (%) represents zero, one, or multiple characters.
+        2. The underscore sign(_) represents one, single character
+    <!-- Patterns -->
+    1. LIKE 'a%' => Starts with "a";
+    2. LIKE '%a' => End with "a";
+    3. LIKE '%or%' => Have "or" in any position
+    4. LIKE '_r%' => Have 'r' in the second position
+    5. LIKE 'a_%' => Start with "a" and are atleast 2 characters in length
+    6. LIKE 'a__%' => Start with "a" and are atleast 3 characters in length
+    7. LIKE 'a%o' => Start with "a" and ends with "o"
