@@ -325,3 +325,11 @@ EX. => CREATE TABLE students (
             PRIMARY KEY(id),
             FOREIGN KEY (city) REFERENCES cities  (cid)
         );
+
+<!-- Q. WHAT IS MYSQL INNER JOIN? -->
+1. The MySQL Inner Join is used to returns only those results from the tables that match the specified condition and hides other rows and columns.
+2. MySQL assumes it as a default Join, so it is optional to use the inner Join Keyword with the query.
+        Syntax :
+            SELECT <COLUMNS_NAME> FROM <TABLE_NAME1> INNER JOIN <TABLE_NAME2> ON <CONDITION1>
+        Ex. =>
+            SELECT * FROM students INNER JOIN cities ON students.city_id = cities.cid; 
