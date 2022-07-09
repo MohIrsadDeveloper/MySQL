@@ -173,3 +173,155 @@ EX. => CREATE TABLE students (
     5. LIKE 'a_%' => Start with "a" and are atleast 2 characters in length
     6. LIKE 'a__%' => Start with "a" and are atleast 3 characters in length
     7. LIKE 'a%o' => Start with "a" and ends with "o"
+
+    <!-- Example of above patterns -->
+    1. SELECT * FROM students WHERE name LIKE "a%";
+    2. SELECT * FROM students WHERE name LIKE "%a";
+    3. SELECT * FROM students WHERE name LIKE "%a%";
+    4. SELECT * FROM students WHERE name LIKE "_a%";
+    5. SELECT * FROM students WHERE name LIKE "a_%";
+    6. SELECT * FROM students WHERE name LIKE "a__%";
+    7. SELECT * FROM students WHERE name LIKE "a%l";
+
+<!-- Data with Between & Not Between -->
+1. SELECT * FROM students WHERE age BETWEEN <value1> AND <value2>;
+    Ex. =>
+        SELECT * FROM students WHERE age BETWEEN 20 AND 30;
+
+2. SELECT * FROM students WHERE age NOT BETWEEN <value1> AND <value2>;
+    Ex. =>
+        SELECT * FROM students WHERE age NOT BETWEEN 20 AND 30;
+
+<!-- Order By AND Distinct in MySQL -->
+1. SELECT * FROM <TABLE_NAME> ORDER BY <COLUMN_NAME> ASC | DESC;
+    Ex. =>
+        <!-- for name -->
+        SELECT * FROM students ORDER BY name ASC;
+        SELECT * FROM students ORDER BY name DESC;
+        <!-- for age -->
+        SELECT * FROM students ORDER BY age ASC;
+        SELECT * FROM students ORDER BY age DESC;
+
+2. SELECT DISTINCT <COLUMN_NAME> FROM <TABLE_NAME>;
+    Ex. =>
+        <!-- for age -->
+        SELECT DISTINCT age FROM students;
+        <!-- for city with order -->
+        SELECT DISTINCT city FROM students ORDER BY ASC;
+        SELECT DISTINCT city FROM students ORDER BY DESC;
+
+<!-- IS NULL AND IS NOT NULL Operators -->
+    syntax :
+        SELECT * FROM students WHERE <COLUMN_NAME> IS NULL | IS NOT NULL;
+    Ex. =>
+        SELECT * FROM students WHERE
+
+<!-- LIMIT AND OFFSET -->
+1. LIMIT => If want to LIMIT, the number of results that are returned you can simply use the LIMIT command with several rows to LIMIT by.
+    LIMIT is use with any command like WHERE, ORDER BY, etc.
+
+    syntax :
+        SELECT * FROM <TABLE_NAME> LIMIT [NUMBER TO LIMIT BY];
+    Ex. =>
+        SELECT * FROM students LIMIT 10;
+
+2. OFFSET => OFFSET is used to LIMIT with pagination like from 5th to 10th and 10th to 16th and so on.
+    OFFSET always use with LIMIT command.
+
+    Syntax :
+        SELECT * FROM students LIMIT [NUMBER TO LIMIT BY] OFFSET [OFFSET LIMIT];
+    Ex. =>
+        SELECT * FROM students LIMIT 10 OFFSET 1;
+        SELECT * FROM students LIMIT 10 OFFSET 10;
+
+<!-- Aggregate Functions : SUM, MIN, MAX & AVG -->
+1. COUNT() : Returns the number of rows in a database table.
+    Syntax :
+        SELECT COUNT(<COLUMN_NAME>) FROM <TABLE_NAME>;
+
+    Ex. =>
+        SELECT COUNT(id) FROM students WHERE fees > 5000;
+
+2. SUM() : Returns the total sum of a numeric column.
+    Syntax :
+        SELECT SUM(<COLUMN_NAME>) FROM <TABLE_NAME>;
+
+    Ex. =>
+        SELECT SUM(age) FROM students;
+
+3. AVG() : Calculates the average of a set of values.
+    Syntax :
+        SELECT AVG(<COLUMN_NAME>) FROM <TABLE_NAME>;
+
+    Ex. =>
+        SELECT AVG(age) FROM students;
+
+4. MIN() : Returns the lowest value (minimum) in a set of non-NULL values.
+    Syntax :
+        SELECT MIN(<COLUMN_NAME>) FROM <TABLE_NAME>;
+
+    Ex. =>
+        SELECT MIN(age) FROM students;
+
+5. MAX() : Returns the greatest value (maximum) in a set of non-NULL values.
+    Syntax :
+        SELECT MAX(<COLUMN_NAME>) FROM <TABLE_NAME>;
+    Ex. =>
+        SELECT MAX(age) FROM students;
+
+<!-- UPDATE Query -->
+1. UPDATE => UPDATE Query is used to make updation on fields. In Update Command Where Clause is mandetory.
+    Syntax :
+        UPDATE <TABLE_NAME> SET 
+        field1 = <new-value1>,
+        field2 = <new-value2> [WHERE Clause];
+
+    Ex. =>
+        UPDATE students SET age = 20 WHERE id = 2;
+        UPDATE students SET
+        age = 30 WHERE id  = 5;
+
+<!-- DELETE Query -->
+1. DELETE => Delete command only remove the data or field then not change the primary key.
+             If we insert new records then it will insert with new primary key.
+    Syntax :
+        DELETE FROM <TABLE_NAME> [WHERE Clause];
+
+    Ex. =>
+        DELETE FROM students WHERE id = 5;
+
+<!-- PRIMARY KEY AND FOREIGN KEY -->
+1. Commit =>
+    Syntax :
+        COMMIT;
+
+2. Rollback =>
+    Syntax :
+        ROLLBACK;
+
+<!-- PRIMARY KEY AND FOREIGN KEY -->
+1. Primary key =>
+            1. Primary key always contains unique data
+            2. It cannot be null
+            3. There must be a single primary key
+    Syntax :    
+        CREATE TABLE <TABLE_NAME> (
+            id INT NOT NULL AUTO_INCREMENT,
+            name VARCHAR(50) NOT NULL,
+            age INT NOT NULL,
+            city VARCHAR(10) NOT NULL,
+            PRIMARY KEY(id)
+        );
+
+2. Foreign Key =>
+            1. The foreign key is used to link two tables.
+            2. A foreign key in one table (child table) is used to point PRIMARY KEY in another table (parent table)
+    Syntax :
+        CREATE TABLE <TABLE_NAME> (
+            id INT NOT NULL AUTO_INCREMENT,
+            name VARCHAR(50) NOT NULL,
+            age INT NOT NULL,
+            city INT NOT NULL,
+            PRIMARY KEY(id),
+            FOREIGN KEY (city) REFERENCES cities  (cid)
+        );
