@@ -73,7 +73,7 @@ MySQL Commands =>
 1. Create Database => CREATE DATABASE <DATABASE_NAME>;
 2. Use Database => USE <DATABASE_NAME>;
 3. Drop Database => DROP DATABASE <DATABASE_NAME>;
-4. Show Current Database => <DATABASES>;
+<!-- 4. Show Current Database => <DATABASES>; -->
 
         <!-- TABLES -->
 1. Create Table => CREATE TABLE <TABLE_NAME> (
@@ -327,9 +327,82 @@ EX. => CREATE TABLE students (
         );
 
 <!-- Q. WHAT IS MYSQL INNER JOIN? -->
-1. The MySQL Inner Join is used to returns only those results from the tables that match the specified condition and hides other rows and columns.
-2. MySQL assumes it as a default Join, so it is optional to use the inner Join Keyword with the query.
+1. INNER JOIN =>
+    1. The MySQL Inner Join is used to returns only those results from the tables that match the specified condition and hides other rows and columns.
+    2. MySQL assumes it as a default Join, so it is optional to use the inner Join Keyword with the query.
+            Syntax :
+                SELECT <COLUMNS_NAME> FROM <TABLE_NAME1> INNER JOIN <TABLE_NAME2> ON <CONDITION1>
+            Ex. =>
+                SELECT * FROM students INNER JOIN cities ON students.city_id = cities.cid;
+
+<!-- What is MySQL left JOIN ? -->
+2. Left JOIN =>
+    1. The MySQL LEFT JOIN keyword returns all records from the left table (table1), and the matched records from the right table (table2).
+
+    Syntax :
+        SELECT <COLUMN_NAMES> FROM <TABLE_NAME1> LEFT JOIN <TABLE_NAME2> ON <TABLE_NAME1>.<COLUMN_NAME> = <TABLE_NAME2>.<COLUMN_NAME>;
+    Ex. =>
+        SELECT * FROM students LEFT JOIN cities ON students.city = cities.id;
+
+<!-- What is MySQL right JOIN ? --> 
+3. Right JOIN =>
+    1. The RIGHT JOIN keyword returns all records from the right table (table2), and the matched records from the left table (table1).
+
+    Syntax :
+        SELECT <COLUMN_NAMES> FROM <TABLE_NAME1> RIGHT JOIN <TABLE_NAME2> ON <TABLE_NAME1>.<COLUMN_NAME> = <TABLE_NAME2>.<COLUMN_NAME>;
+    Ex. =>
+        SELECT * FROM students RIGHT JOIN cities ON students.city = cities.id;
+
+<!-- What is Cross JOIN ? -->
+4. Cross JOIN =>
+    1. The MySQL CROSS JOIN produces a result set which is the number of rows in the first table multiplied by the number of rows in the second table if no WHERE clasue is used along with CROSS JOIN.
+    2. This kind of result is called as Certesian Product.
+
+    Syntax :
+        SELECT <COLUMN_NAMES> FROM <TABLE_NAME1> CROSS JOIN <TABLE_NAME2> ON <TABLE_NAME1>.<COLUMN_NAME> = <TABLE_NAME2>.<COLUMN_NAME>;
+
+<!-- Join Multiple Tables using MySQL Command -->
+5. Join Multiple Tables => 
+    Syntax :
+        SELECT <COLUMN_NAMES> FROM <TABLE_NAME1> 
+        INNER JOIN <TABLE_NAME2> 
+        ON <TABLE_NAME1>.<COLUMN_NAME> = <TABLE_NAME2>.<COLUMN_NAME>;
+        INNER JOIN <TABLE_NAME2>
+        ON <TABLE_NAME1>.<COLUMN_NAME> = <TABLE_NAME2>.<COLUMN_NAME>;
+
+<!-- Group By & Having Clause -->
+7. 
+    1. Group By => 
         Syntax :
-            SELECT <COLUMNS_NAME> FROM <TABLE_NAME1> INNER JOIN <TABLE_NAME2> ON <CONDITION1>
+            SELECT <COLUMN_NAMES> FROM <TABLE_NAME1>
+            WHERE <CONDITIONS> GROUP BY <COLUMN_NAMES>;
+
+        Ex. SELECT cid, COUNT(cid) FROM students INNER JOIN cities ON students.cid = cities.id GROUP BY (cid);
+    
+    2. Having Clause =>
+        Syntax :
+            SELECT <COLUMN_NAMES> FROM <TABLE_NAME1>
+            WHERE <CONDITIONS> [OPTIONAL]
+            GROUP BY <COLUMN_NAMES>
+            HAVING <CONDITION>;
+
+<!-- MySQL SubQuery with EXISTS & NOT EXIST -->
+8. MySQL SubQuery with Exist & NOT EXIST =>
+    1. Sub Query =>
+        Syntax :
+            SELECT <COLUMN_NAMES> FROM <TABLE_NAME1>
+            WHERE (SELECT <COLUMN_NAME> FROM <TABLE_NAME2>);
+        
         Ex. =>
-            SELECT * FROM students INNER JOIN cities ON students.city_id = cities.cid; 
+            SELECT * FROM students WHERE cid = (SELECT id FROM cities WHERE name = "Mumbai");
+
+    2. Sub Query with Exist Syntax =>
+        Syntax :
+            SELECT <COLUMN_NAMES> FROM <TABLE_NAME1>
+            WHERE EXISTS (SELECT <COLUMN_NAME> FROM <TABLE_NAME2>);
+
+        
+    3. Sub Query with Not Exist Syntax =>
+        Syntax :
+            SELECT <COLUMN_NAMES> FROM <TABLE_NAME1>
+            WHERE NOT EXISTS (SELECT <COLUMN_NAME> FROM <TABLE_NAME2>);
