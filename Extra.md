@@ -29,3 +29,7 @@ Id firstName lastName Age Education City
     select min(age) from familylist;
     select avg(age) from familylist;
  -->
+
+<!-- Set to authentication for nodejs -->
+ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Mm@12378692';
+flush privileges;
