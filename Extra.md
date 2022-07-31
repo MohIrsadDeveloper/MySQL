@@ -31,5 +31,22 @@ Id firstName lastName Age Education City
  -->
 
 <!-- Set to authentication for nodejs -->
- ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Mm@12378692';
+ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
 flush privileges;
+
+show databases;
+drop database time;
+create database time;
+use time;
+create table event(
+	id int primary key auto_increment not null,
+    ts timestamp,
+    description varchar(20)
+);
+select * from event;
+insert into event(ts, description) values (current_timestamp(),"first");
+SELECT * 
+FROM event 
+WHERE ADDTIME(now(), '02:00:00') > ts;
+update event set ts=addtime(now(), "02:00:00") where id=1;
+select * from event where ts>now();
